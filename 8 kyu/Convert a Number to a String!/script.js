@@ -1,4 +1,4 @@
 function numberToString(num) {
-    num = num.toString();
-    return num;
+    num = num.toString()
+    return num
 }
