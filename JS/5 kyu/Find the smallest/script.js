@@ -1,23 +1,21 @@
 function smallest(n) {
-  let s = String(n);
-  let min = n;
-  let from = 0;
-  let to = 0;
+  const s = n.toString();
+  let minNum = n;
+  let iMin = 0, jMin = 0;
 
   for (let i = 0; i < s.length; i++) {
       for (let j = 0; j < s.length; j++) {
-          // Create a new string by removing the i-th digit and inserting it into the j-th position
-          let newStr = s.slice(0, i) + s.slice(i + 1);
-          newStr = newStr.slice(0, j) + s[i] + newStr.slice(j);
-          
-          // If the new number is smaller and the 'from' index is smaller or equal to the current smallest 'from' index
-          if (parseInt(newStr) < min || (parseInt(newStr) === min && i <= from)) {
-              min = parseInt(newStr);
-              from = i;
-              to = j;
+          if (i !== j) {
+              const moved = s.substring(0, i) + s.substring(i+1);  // remove the ith char
+              const newNum = parseInt(moved.substring(0, j) + s[i] + moved.substring(j));
+              if (newNum < minNum || (newNum === minNum && i < iMin) || (newNum === minNum && i === iMin && j < jMin)) {
+                  minNum = newNum;
+                  iMin = i;
+                  jMin = j;
+              }
           }
       }
   }
 
-  return [min, from, to];
+  return [minNum, iMin, jMin];
 }
